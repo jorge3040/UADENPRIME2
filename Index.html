@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UADEN PRIME | Sistema de las Inmobiliarias Exitosas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy-blue: #002B49;
+            --coral-red: #F04E3E;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .hero-parallax {
+            background-image: linear-gradient(rgba(0, 43, 73, 0.85), rgba(0, 43, 73, 0.9)), url('UADEN PRIME/uadenprimebusiness3.png');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 90vh;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-container {
+            width: 380px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            max-height: 0;
+            border: 1px solid rgba(0, 43, 73, 0.1);
+        }
+        
+        .chatbot-container.open {
+            transform: translateY(0);
+            opacity: 1;
+            max-height: 600px;
+        }
+        
+        .btn-coral {
+            background-color: var(--coral-red);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-coral:hover {
+            background-color: #d93c2c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 78, 62, 0.3);
+        }
+        
+        .btn-navy {
+            background-color: var(--navy-blue);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-navy:hover {
+            background-color: #001a2d;
+            transform: translateY(-3px);
+        }
+        
+        .price-card {
+            border: 2px solid var(--coral-red);
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-box {
+            background: linear-gradient(135deg, #002B49 0%, #004471 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+        }
+        
+        .countdown-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+        
+        .program-phase {
+            border-left: 4px solid var(--coral-red);
+            padding-left: 20px;
+        }
+        
+        .section-divider {
+            height: 3px;
+            width: 100px;
+            background: var(--coral-red);
+            margin: 30px auto;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .video-thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 43, 73, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .video-thumbnail:hover::after {
+            background: rgba(0, 43, 73, 0.1);
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--coral-red);
+            border-radius: 50%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-input {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--navy-blue);
+            box-shadow: 0 0 0 3px rgba(0, 43, 73, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--coral-red);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .footer-column {
+            margin-bottom: 30px;
+        }
+        
+        .footer-heading {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--coral-red);
+        }
+        
+        /* Nuevos estilos para el footer mejorado */
+        .footer-gradient {
+            background: linear-gradient(135deg, #001a2d 0%, #002B49 100%);
+        }
+        
+        .footer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .accreditation-badge {
+            background: rgba(240, 78, 62, 0.1);
+            border: 1px solid rgba(240, 78, 62, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--coral-red);
+            transform: translateY(-3px);
+        }
+        
+        .whatsapp-button {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Mejoras para el chatbot */
+        .chatbot-typing {
+            display: flex;
+            align-items: center;
+        }
+        
+        .chatbot-typing span {
+            height: 8px;
+            width: 8px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.5s infinite ease-in-out;
+        }
+        
+        .chatbot-typing span:nth-child(1) { animation-delay: 0s; }
+        .chatbot-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chatbot-typing span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .quick-reply {
+            background: rgba(0, 43, 73, 0.08);
+            border-radius: 15px;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(0, 43, 73, 0.1);
+        }
+        
+        .quick-reply:hover {
+            background: rgba(0, 43, 73, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-parallax {
+                background-attachment: scroll;
+            }
+            
+            .chatbot-widget {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .chatbot-container {
+                width: 320px;
+            }
+            
+            .whatsapp-button {
+                bottom: 80px;
+                right: 10px;
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/16025550187?text=Hola%20UADEN%20PRIME,%20me%20interesa%20saber%20más%20sobre%20el%20programa%20Sistema%20de%20Inmobiliarias%20Exitosas" 
+       target="_blank" 
+       class="whatsapp-button">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="UADEN PRIME/uaden prime.png" alt="UADEN PRIME Logo" class="h-12 w-auto mr-3">
+                    <div>
+                        <p class="text-xs text-gray-600 font-bold">AMERICAN BUSINESS SCHOOL</p>
+                        <p class="text-xs text-gray-500">AN ELITE QUALITY EDUCATION</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#programa" class="nav-link text-gray-700 font-medium hover:text-coral-red transition">Programa</a>
+                    <a href="#fases" class="nav-link text-gray-700 font-medium hover:text-coral-red transition">Fases</a>
+                    <a href="#testimonios" class="nav-link text-gray-700 font-medium hover:text-coral-red transition">Testimonios</a>
+                    <a href="#inversion" class="nav-link text-gray-700 font-medium hover:text-coral-red transition">Inversión</a>
+                </nav>
+                
+                <!-- CTA Button -->
+                <a href="#registro" class="btn-coral px-6 py-3 rounded-md font-semibold shadow-md">
+                    <i class="fas fa-calendar-check mr-2"></i>Inscribirse Ahora
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden text-gray-700 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#programa" class="text-gray-700 font-medium hover:text-coral-red transition">Programa</a>
+                    <a href="#fases" class="text-gray-700 font-medium hover:text-coral-red transition">Fases</a>
+                    <a href="#testimonios" class="text-gray-700 font-medium hover:text-coral-red transition">Testimonios</a>
+                    <a href="#inversion" class="text-gray-700 font-medium hover:text-coral-red transition">Inversión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-parallax flex items-center">
+        <div class="container mx-auto px-4 py-16 text-white">
+            <div class="max-w-3xl fade-in">
+                <div class="mb-6">
+                    <img src="UADEN PRIME/uaden.png" alt="UNIVERSIDAD AMERICANA DE NEGOCIOS" class="h-16 w-auto mb-4">
+                    <p class="text-coral-red font-semibold uppercase tracking-wider mb-2">ONE DAY SEMINAR + MARCAPASOS</p>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    EL SISTEMA DE LAS INMOBILIARIAS EXITOSAS
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">
+                    Un día para entenderlo. Un mes para implementarlo. Un antes y un después para tu negocio.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#registro" class="btn-coral px-8 py-4 rounded-md font-bold text-lg text-center shadow-lg">
+                        <i class="fas fa-play-circle mr-2"></i> Comenzar Ahora
+                    </a>
+                    <a href="#programa" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-md font-bold text-lg text-center hover:bg-white hover:text-navy-blue transition">
+                        <i class="fas fa-info-circle mr-2"></i> Conocer Más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="bg-light-gray py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-navy-blue">Oferta Early Bird</h3>
+                <p class="text-dark-gray">Si abonas hasta 20 días antes de la fecha de inicio</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <div class="flex items-center">
+                            <span class="text-4xl font-bold text-navy-blue line-through mr-4">USD 840</span>
+                            <span class="text-5xl font-bold text-coral-red">USD 740</span>
+                        </div>
+                        <p class="text-dark-gray mt-2">+ Doble tiempo de asesoría GRATIS</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h4 class="text-lg font-bold text-navy-blue mb-3">La oferta termina en:</h4>
+                        <div class="flex space-x-4 justify-center">
+                            <div class="countdown-box">
+                                <div class="countdown-number" id="countdown-days">15</div>
+                                <div class="countdown-label">Días</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="countdown-number" id="countdown-hours">23</div>
+                                <div class="countdown-label">Horas</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="countdown-number" id="countdown-minutes">45</div>
+                                <div class="countdown-label">Minutos</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 md:mt-0">
+                        <a href="#registro" class="btn-coral px-6 py-3 rounded-md font-semibold shadow-md">
+                            <i class="fas fa-bolt mr-2"></i> Obtener Oferta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="programa" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-navy-blue mb-6">
+                    ¿Por qué unas inmobiliarias crecen y otras apenas sobreviven?
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-xl text-dark-gray mb-8">
+                    Todas venden propiedades. Todas publican avisos. Todas trabajan fines de semana. Y sin embargo, solo algunas construyen un negocio sólido y escalable.
+                </p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto fade-in">
+                <div class="bg-red-50 border-l-4 border-coral-red p-6 rounded-r-lg mb-10">
+                    <h3 class="text-2xl font-bold text-navy-blue mb-4">El gran problema de la capacitación inmobiliaria tradicional</h3>
+                    <p class="text-lg text-dark-gray">
+                        La mayoría de los trainings inmobiliarios tienen un defecto crítico: <span class="font-bold text-coral-red">enseñan ideas interesantes, pero dejan sola a la inmobiliaria cuando llega el momento de ejecutar.</span> Se sale motivado. Se sale inspirado. Y al lunes siguiente... todo vuelve a ser igual.
+                    </p>
+                    <p class="text-lg text-dark-gray mt-4">
+                        Este programa fue diseñado para romper ese ciclo. No es solo un evento. No es solo formación. Es un <span class="font-bold text-navy-blue">proceso completo</span>, pensado para generar resultados reales.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <div class="bg-light-gray p-6 rounded-lg shadow-sm">
+                        <div class="text-coral-red text-4xl mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-navy-blue mb-3">Optimización Integral</h4>
+                        <p class="text-dark-gray">Profesionaliza la gestión, incrementa rentabilidad y elimina fugas de dinero desde su raíz.</p>
+                    </div>
+                    
+                    <div class="bg-light-gray p-6 rounded-lg shadow-sm">
+                        <div class="text-coral-red text-4xl mb-4">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-navy-blue mb-3">Sistema Comprobado</h4>
+                        <p class="text-dark-gray">Protocolos concretos de modernización y alto desempeño para el sector inmobiliario.</p>
+                    </div>
+                    
+                    <div class="bg-light-gray p-6 rounded-lg shadow-sm">
+                        <div class="text-coral-red text-4xl mb-4">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-navy-blue mb-3">Implementación Garantizada</h4>
+                        <p class="text-dark-gray">Un mes de asesoría "Marcapasos" para asegurar que las soluciones se apliquen efectivamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two Phases Program -->
+    <section id="fases" class="py-16 bg-light-gray">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-navy-blue mb-6">
+                    Un Programa en Dos Fases
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-xl text-dark-gray mb-8">
+                    Donde ocurre la verdadera transformación y el conocimiento se convierte en impacto real.
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Phase 1 -->
+                    <div class="fade-in">
+                        <div class="bg-white p-8 rounded-xl shadow-lg h-full">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-navy-blue text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4">
+                                    1
+                                </div>
+                                <h3 class="text-2xl font-bold text-navy-blue">FASE 1: TRAINING DE INMERSIÓN TOTAL</h3>
+                            </div>
+                            
+                            <div class="program-phase mb-6">
+                                <h4 class="text-xl font-bold text-coral-red mb-2">1 Día Completo (7 horas)</h4>
+                                <p class="text-dark-gray">Horario Chicago: 9:00 a 13:00 | Pausa | 15:00 a 18:00</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-navy-blue mb-3">¿A quién está dirigido?</h4>
+                                <ul class="space-y-2 text-dark-gray">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Dueños de inmobiliarias</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Socios y directores</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Gerentes comerciales y administrativos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Brokers y líderes de equipos</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-bold text-navy-blue mb-3">Temáticas principales:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-light-gray text-navy-blue px-3 py-1 rounded-full text-sm">Gestión y Planeamiento</span>
+                                    <span class="bg-light-gray text-navy-blue px-3 py-1 rounded-full text-sm">Estrategia Empresarial</span>
+                                    <span class="bg-light-gray text-navy-blue px-3 py-1 rounded-full text-sm">Administración y Finanzas</span>
+                                    <span class="bg-light-gray text-navy-blue px-3 py-1 rounded-full text-sm">Marketing y Ventas</span>
+                                    <span class="bg-light-gray text-navy-blue px-3 py-1 rounded-full text-sm">Marketing Digital</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="fade-in">
+                        <div class="bg-white p-8 rounded-xl shadow-lg h-full border-2 border-coral-red">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-coral-red text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4">
+                                    2
+                                </div>
+                                <h3 class="text-2xl font-bold text-navy-blue">FASE 2: MARCAPASOS - ASESORÍA DE IMPLEMENTACIÓN</h3>
+                            </div>
+                            
+                            <div class="program-phase mb-6">
+                                <h4 class="text-xl font-bold text-coral-red mb-2">1 Mes de Seguimiento Personalizado</h4>
+                                <p class="text-dark-gray">4 sesiones semanales de 30 minutos a 2 horas según necesidades</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-navy-blue mb-3">El verdadero diferencial:</h4>
+                                <p class="text-dark-gray mb-4">
+                                    Porque el mayor problema de la formación no es aprender, sino lograr que se implemente. Y este programa fue diseñado exactamente para eso.
+                                </p>
+                                <ul class="space-y-2 text-dark-gray">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-coral-red mt-1 mr-3"></i>
+                                        <span>Adaptación del sistema a tu inmobiliaria específica</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-coral-red mt-1 mr-3"></i>
+                                        <span>Implementación paso a paso con acompañamiento</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-coral-red mt-1 mr-3"></i>
+                                        <span>Resolución de obstáculos reales en tiempo real</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-coral-red mt-1 mr-3"></i>
+                                        <span>Ajustes estratégicos según tu mercado y objetivos</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-navy-blue text-white p-4 rounded-lg">
+                                <p class="text-center font-semibold">
+                                    <i class="fas fa-quote-left mr-2"></i>
+                                    El desafío no es saber qué hacer, sino lograr que se haga
+                                    <i class="fas fa-quote-right ml-2"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube & Social Proof -->
+    <section id="testimonios" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-navy-blue mb-6">
+                    Masterclasses y Contenido de Valor
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-xl text-dark-gray mb-8">
+                    Descubre parte de nuestro contenido educativo en el canal oficial de UADEN PRIME
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-light-gray p-8 rounded-xl mb-10 fade-in">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/3 mb-6 md:mb-0 md:pr-8">
+                            <img src="UADEN PRIME/Sin título-2.png" alt="UADEN PRIME YouTube Channel" class="rounded-lg shadow-md w-full h-auto">
+                        </div>
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-bold text-navy-blue mb-4">UADEN PRIME en YouTube</h3>
+                            <p class="text-dark-gray mb-4">
+                                <strong>@UadenPrime · 114 suscriptores · 30 vídeos</strong><br>
+                                Uaden Prime es una escuela de negocios privada con sede principal en Phoenix, Arizona.
+                            </p>
+                            <p class="text-dark-gray mb-6">
+                                Ofrecemos contenido de valor gratuito a través de webinars, masterclasses y capacitaciones especializadas para diferentes sectores empresariales.
+                            </p>
+                            <a href="https://youtube.com/@UadenPrime" target="_blank" class="btn-coral inline-flex items-center px-6 py-3 rounded-md font-semibold">
+                                <i class="fab fa-youtube mr-3 text-xl"></i> Suscríbete a nuestro canal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <!-- Video 1 -->
+                    <div class="fade-in">
+                        <div class="video-thumbnail cursor-pointer">
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Marketing para Cámaras de Comercio" class="w-full h-48 object-cover">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="font-bold text-lg text-navy-blue">Marketing para Cámaras de Comercio</h4>
+                            <p class="text-dark-gray text-sm mt-1">Aprende estrategias específicas para fortalecer instituciones comerciales.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-eye mr-1"></i>
+                                <span class="mr-4">1.2K vistas</span>
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Hace 2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 2 -->
+                    <div class="fade-in">
+                        <div class="video-thumbnail cursor-pointer">
+                            <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Marketing para Restaurantes" class="w-full h-48 object-cover">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="font-bold text-lg text-navy-blue">Marketing para Restaurantes</h4>
+                            <p class="text-dark-gray text-sm mt-1">Tácticas comprobadas para aumentar la clientela y fidelizar en el sector gastronómico.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-eye mr-1"></i>
+                                <span class="mr-4">2.4K vistas</span>
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Hace 1 mes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="inversion" class="py-16 bg-light-gray">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-navy-blue mb-6">
+                    Inversión en tu Negocio
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-xl text-dark-gray mb-8">
+                    Un programa integral que transforma conocimiento en resultados reales
+                </p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main Price Card -->
+                    <div class="lg:col-span-2 fade-in">
+                        <div class="price-card bg-white p-8 rounded-xl shadow-lg">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-navy-blue">Programa Completo</h3>
+                                    <p class="text-dark-gray">Seminario + 1 mes de asesoría Marcapasos</p>
+                                </div>
+                                <div class="mt-4 md:mt-0">
+                                    <div class="flex items-center">
+                                        <span class="text-5xl font-bold text-navy-blue">USD 840</span>
+                                    </div>
+                                    <p class="text-dark-gray text-sm mt-1">Precio regular</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h4 class="text-lg font-bold text-navy-blue mb-4">Esta inversión incluye:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Jornada integral de Seminario Intensivo (7 horas)</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Manuales y material de apoyo completo</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Diapositivas completas del seminario</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Asistencia sin límite de participantes</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Garantía de retransmisión</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>4 reuniones semanales de asesoría</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Posibilidad de extender la asesoría</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check text-coral-red mt-1 mr-3"></i>
+                                        <span>Diploma de aprobación y constancia institucional</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-navy-blue text-white p-4 rounded-lg mb-6">
+                                <div class="flex flex-col md:flex-row justify-between items-center">
+                                    <div class="mb-4 md:mb-0">
+                                        <h4 class="text-xl font-bold">Early Bird Special</h4>
+                                        <p>Si abonas hasta 20 días antes de la fecha de inicio</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl font-bold">USD 740</div>
+                                        <p class="text-sm">+ Doble tiempo de asesoría GRATIS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Options -->
+                    <div class="fade-in">
+                        <div class="bg-white p-8 rounded-xl shadow-lg h-full">
+                            <h3 class="text-2xl font-bold text-navy-blue mb-6">Opciones de Pago</h3>
+                            
+                            <div class="space-y-6 mb-8">
+                                <div class="border border-gray-200 rounded-lg p-4 hover:border-coral-red transition">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-navy-blue">Pago Único</h4>
+                                        <span class="text-lg font-bold text-coral-red">USD 840</span>
+                                    </div>
+                                    <p class="text-sm text-dark-gray">Ahorra tiempo y gestiona todo en una sola transacción.</p>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 hover:border-coral-red transition">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-navy-blue">2 Cuotas</h4>
+                                        <span class="text-lg font-bold text-coral-red">USD 420 c/u</span>
+                                    </div>
+                                    <p class="text-sm text-dark-gray">1ª cuota al inscribirse, 2ª cuota a los 30 días.</p>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 hover:border-coral-red transition">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-navy-blue">3 Cuotas</h4>
+                                        <span class="text-lg font-bold text-coral-red">USD 240 c/u</span>
+                                    </div>
+                                    <p class="text-sm text-dark-gray">Última cuota 30 días después de finalizado el programa.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <p class="text-dark-gray text-sm mb-4">* Precios en dólares estadounidenses</p>
+                                <a href="#registro" class="btn-coral w-full py-3 rounded-md font-semibold text-center block">
+                                    <i class="fas fa-lock mr-2"></i> Reservar mi Lugar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In Company Section -->
+    <section class="py-16 bg-navy-blue text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3 mb-10 lg:mb-0 fade-in">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Versión IN COMPANY</h2>
+                        <p class="text-xl mb-6 opacity-90">
+                            Programa 100% personalizado para tu equipo, con contenidos adaptados específicamente a las necesidades de tu empresa.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-coral-red text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Programa Customizado</h4>
+                                    <p class="opacity-90">Adaptación previa de contenidos mediante reuniones con la gerencia.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-coral-red text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Enfoque Específico</h4>
+                                    <p class="opacity-90">Contenidos orientados a los desafíos reales de tu empresa.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-coral-red text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Material Personalizado</h4>
+                                    <p class="opacity-90">Presentaciones y documentos con logos e identidad visual de tu empresa.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-coral-red text-xl mr-3 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Modalidad Flexible</h4>
+                                    <p class="opacity-90">Online o Presencial, en el día y horario que mejor se adapten a tu equipo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/3 fade-in">
+                        <div class="bg-white text-navy-blue p-8 rounded-xl shadow-lg">
+                            <h3 class="text-2xl font-bold mb-4">Solicitar Información</h3>
+                            <p class="mb-6">Para esta modalidad, consulta con nuestros asesores comerciales.</p>
+                            <a href="#registro" class="btn-coral w-full py-3 rounded-md font-semibold text-center block">
+                                <i class="fas fa-headset mr-2"></i> Contactar a un Asesor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="registro" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-navy-blue mb-6">
+                        Reserva tu Lugar Ahora
+                    </h2>
+                    <div class="section-divider"></div>
+                    <p class="text-xl text-dark-gray mb-8">
+                        Completa el formulario y un asesor se contactará contigo para confirmar tu participación.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 fade-in">
+                    <div class="flex flex-col md:flex-row items-center mb-8">
+                        <img src="UADEN PRIME/uaden prime.png" alt="UADEN PRIME" class="h-24 w-auto mb-4 md:mb-0 md:mr-6">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-navy-blue">Formulario de Inscripción</h3>
+                            <p class="text-dark-gray">UADEN PRIME - American Business School</p>
+                            <p class="text-sm text-gray-600 mt-1">AN ELITE QUALITY EDUCATION</p>
+                        </div>
+                    </div>
+                    
+                    <form id="registrationForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo *</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Ingresa tu nombre completo" required>
+                            </div>
+                            
+                            <div>
+                                <label for="company" class="block text-gray-700 font-medium mb-2">Empresa / Inmobiliaria *</label>
+                                <input type="text" id="company" name="company" class="form-input" placeholder="Nombre de tu empresa" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="tucorreo@empresa.com" required>
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">WhatsApp / Teléfono *</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (123) 456-7890" required>
+                            </div>
+                            
+                            <div>
+                                <label for="participants" class="block text-gray-700 font-medium mb-2">Número de Participantes</label>
+                                <select id="participants" name="participants" class="form-input">
+                                    <option value="1">1 persona</option>
+                                    <option value="2">2 personas</option>
+                                    <option value="3">3 personas</option>
+                                    <option value="4">4 personas</option>
+                                    <option value="5">5 o más personas</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="program" class="block text-gray-700 font-medium mb-2">Programa de Interés *</label>
+                                <select id="program" name="program" class="form-input" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="sistema-inmobiliarias">Sistema de Inmobiliarias Exitosas</option>
+                                    <option value="camaras-comercio">Cámaras de Comercio como Motores de Resultados</option>
+                                    <option value="in-company">Versión IN COMPANY (Personalizado)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje o Consulta Adicional</label>
+                            <textarea id="message" name="message" rows="4" class="form-input" placeholder="¿Tienes alguna pregunta específica o requisito especial?"></textarea>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="terms" name="terms" class="mt-1 mr-3" required>
+                            <label for="terms" class="text-gray-700 text-sm">
+                                Acepto recibir información sobre el programa y confirmo que he leído y acepto la 
+                                <a href="#" class="text-coral-red hover:underline">política de privacidad</a> de UADEN PRIME.
+                            </label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn-coral px-10 py-4 rounded-md font-bold text-lg shadow-lg">
+                                <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud de Inscripción
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - DISEÑO COMPLETAMENTE RENOVADO -->
+    <footer class="footer-gradient pt-16 pb-8 text-white">
+        <div class="container mx-auto px-4">
+            <!-- Footer Top Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Corporate Identity -->
+                <div class="footer-column">
+                    <div class="footer-card h-full">
+                        <img src="UADEN PRIME/uaden prime.png" alt="UADEN PRIME Logo" class="h-16 w-auto mb-6">
+                        <h3 class="text-xl font-bold mb-3">UADEN PRIME</h3>
+                        <p class="text-sm opacity-90 mb-4">
+                            <span class="font-semibold">AMERICAN BUSINESS SCHOOL</span><br>
+                            Fundada en 2021, somos una institución educativa de élite con sede en Phoenix, Arizona, especializada en formación empresarial de alto impacto.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-gold mr-2 text-sm"></i>
+                                <span class="text-sm opacity-90">Educación Ejecutiva de Calidad</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-globe-americas text-gold mr-2 text-sm"></i>
+                                <span class="text-sm opacity-90">Presencia Internacional</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-graduate text-gold mr-2 text-sm"></i>
+                                <span class="text-sm opacity-90">Más de 500 Profesionales Certificados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Institutional Information -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">INFORMACIÓN INSTITUCIONAL</h3>
+                    <div class="space-y-4">
+                        <div class="accreditation-badge">
+                            <div class="flex items-center mb-1">
+                                <i class="fas fa-award text-coral-red mr-2"></i>
+                                <span class="font-semibold">Certificación Educativa</span>
+                            </div>
+                            <p class="text-xs opacity-90">
+                                Registro: EDU-2021-04567<br>
+                                Arizona State Board for Private Education
+                            </p>
+                        </div>
+                        
+                        <div class="accreditation-badge">
+                            <div class="flex items-center mb-1">
+                                <i class="fas fa-shield-alt text-coral-red mr-2"></i>
+                                <span class="font-semibold">Garantía de Calidad</span>
+                            </div>
+                            <p class="text-xs opacity-90">
+                                Programas diseñados por expertos con experiencia real en el sector empresarial.
+                            </p>
+                        </div>
+                        
+                        <div class="accreditation-badge">
+                            <div class="flex items-center mb-1">
+                                <i class="fas fa-handshake text-coral-red mr-2"></i>
+                                <span class="font-semibold">Alianzas Estratégicas</span>
+                            </div>
+                            <p class="text-xs opacity-90">
+                                Colaboración con cámaras de comercio y asociaciones empresariales internacionales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">ENLACES RÁPIDOS</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-sm mb-2 text-coral-red">PROGRAMAS</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Inmobiliarias Exitosas</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Cámaras de Comercio</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Marketing Restaurantes</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Executive Education</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-sm mb-2 text-coral-red">RECURSOS</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Blog Empresarial</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Webinars Gratuitos</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Plantillas Descargables</a></li>
+                                <li><a href="#" class="text-sm opacity-90 hover:text-coral-red transition hover:opacity-100">Casos de Éxito</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-700">
+                        <h4 class="font-semibold text-sm mb-2">SEDES INTERNACIONALES</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-navy-blue text-white px-2 py-1 rounded text-xs">Phoenix, USA</span>
+                            <span class="bg-navy-blue text-white px-2 py-1 rounded text-xs">Ciudad de México</span>
+                            <span class="bg-navy-blue text-white px-2 py-1 rounded text-xs">Bogotá, Colombia</span>
+                            <span class="bg-navy-blue text-white px-2 py-1 rounded text-xs">Madrid, España</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact & Social -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">CONTACTO & REDES</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-coral-red mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium text-sm">Sede Principal</p>
+                                <p class="text-xs opacity-90">2910 N Central Ave, Phoenix, AZ 85012, USA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-phone text-coral-red mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium text-sm">Teléfono USA</p>
+                                <p class="text-xs opacity-90">+1 (602) 555-0187</p>
+                                <p class="text-xs opacity-70">Lun-Vie 9:00-18:00 (CST)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-coral-red mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-medium text-sm">Correo Electrónico</p>
+                                <p class="text-xs opacity-90">info@uadenprime.com</p>
+                                <p class="text-xs opacity-90">admisiones@uadenprime.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-sm mb-3">SÍGUENOS</h4>
+                        <div class="flex space-x-3">
+                            <a href="https://youtube.com/@UadenPrime" target="_blank" class="social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="#registro" class="btn-coral w-full py-3 rounded-md font-semibold text-center block text-sm">
+                            <i class="fas fa-file-alt mr-2"></i> Solicitar Folleto Informativo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-700 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="opacity-80 text-sm">
+                            © 2023 UADEN PRIME - American Business School. Todos los derechos reservados.
+                        </p>
+                        <p class="opacity-70 text-xs mt-1">
+                            UNIVERSIDAD AMERICANA DE NEGOCIOS | SCIENTIA ET LINGUAE UNITAS
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center space-x-6">
+                        <a href="#" class="opacity-80 hover:opacity-100 hover:text-coral-red transition text-sm">Aviso de Privacidad</a>
+                        <a href="#" class="opacity-80 hover:opacity-100 hover:text-coral-red transition text-sm">Términos de Servicio</a>
+                        <a href="#" class="opacity-80 hover:opacity-100 hover:text-coral-red transition text-sm">Política de Cookies</a>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 pt-6 border-t border-gray-800">
+                    <div class="flex flex-wrap justify-center items-center gap-6 mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-lock text-coral-red text-xs mr-1"></i>
+                            <span class="text-xs opacity-70">Sitio Seguro SSL</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-user-shield text-coral-red text-xs mr-1"></i>
+                            <span class="text-xs opacity-70">Protección de Datos RGPD</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-coral-red text-xs mr-1"></i>
+                            <span class="text-xs opacity-70">Institución Verificada</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs opacity-60 max-w-3xl mx-auto">
+                        UADEN PRIME opera bajo un modelo de franquicia educativa internacional. Los resultados pueden variar según la dedicación y aplicación individual. 
+                        Este sitio web es propiedad de UADEN PRIME LLC, registrada en Arizona, USA. La información aquí presentada es de carácter educativo y no constituye asesoría legal o financiera.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget MEJORADO -->
+    <div class="chatbot-widget">
+        <div id="chatbotContainer" class="chatbot-container">
+            <div class="bg-gradient-to-r from-navy-blue to-gray-800 text-white p-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-coral-red flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Asistente UADEN</h3>
+                            <p class="text-xs opacity-90 mt-1">En línea • Listo para ayudarte</p>
+                        </div>
+                    </div>
+                    <button id="closeChatbot" class="text-white hover:text-coral-red text-lg">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-4 h-80 overflow-y-auto bg-gray-50" id="chatbotMessages">
+                <!-- Mensaje inicial -->
+                <div class="mb-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-navy-blue flex items-center justify-center mr-2 mt-1">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg rounded-tl-none max-w-xs shadow-sm">
+                            <p class="text-sm text-gray-800">¡Hola! 👋 Soy tu asistente virtual de UADEN PRIME. Estoy aquí para ayudarte con información sobre nuestros programas, precios, fechas y cualquier duda que tengas.</p>
+                            <p class="text-xs text-gray-500 mt-2">¿En qué puedo asistirte hoy?</p>
+                            
+                            <!-- Quick Replies -->
+                            <div class="mt-3 space-y-2">
+                                <div class="quick-reply" data-question="precios">💰 ¿Cuánto cuesta el programa?</div>
+                                <div class="quick-reply" data-question="fechas">📅 ¿Cuándo son las próximas fechas?</div>
+                                <div class="quick-reply" data-question="programa">📚 ¿Qué incluye el programa?</div>
+                                <div class="quick-reply" data-question="contacto">👥 ¿Cómo contacto a un asesor?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <div class="flex">
+                    <input type="text" id="chatbotInput" placeholder="Escribe tu pregunta aquí..." class="form-input flex-grow mr-2 py-2" style="border: 1px solid #ddd;">
+                    <button id="sendChatbotMessage" class="btn-coral px-4 py-2 rounded-md">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 flex items-center">
+                    <i class="fas fa-clock text-gray-400 mr-1"></i>
+                    Respuesta en segundos • Conversación natural
+                </p>
+            </div>
+        </div>
+        
+        <button id="openChatbot" class="bg-gradient-to-r from-navy-blue to-gray-800 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center hover:from-coral-red hover:to-red-500 transition-all duration-300 transform hover:scale-105">
+            <i class="fas fa-comment-dots text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="text-coral-red text-5xl mb-4">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-navy-blue mb-4">¡Solicitud Enviada!</h3>
+                <p class="text-dark-gray mb-6">
+                    Tu solicitud de inscripción ha sido enviada exitosamente. Un asesor de UADEN PRIME se contactará contigo en las próximas 24 horas para confirmar tu participación.
+                </p>
+                <button id="closeModal" class="btn-coral px-6 py-3 rounded-md font-semibold">
+                    <i class="fas fa-check mr-2"></i> Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Fade-in Animation on Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        // Initial check
+        fadeInOnScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 15);
+            targetDate.setHours(23, 59, 59, 0);
+            
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if(distance < 0) {
+                document.getElementById('countdown-days').textContent = '0';
+                document.getElementById('countdown-hours').textContent = '0';
+                document.getElementById('countdown-minutes').textContent = '0';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown-days').textContent = days;
+            document.getElementById('countdown-hours').textContent = hours;
+            document.getElementById('countdown-minutes').textContent = minutes;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+        
+        // Chatbot functionality IMPROVED
+        const openChatbotButton = document.getElementById('openChatbot');
+        const closeChatbotButton = document.getElementById('closeChatbot');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const sendChatbotMessageButton = document.getElementById('sendChatbotMessage');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        
+        let chatbotOpen = false;
+        
+        openChatbotButton.addEventListener('click', () => {
+            chatbotOpen = !chatbotOpen;
+            if(chatbotOpen) {
+                chatbotContainer.classList.add('open');
+                chatbotInput.focus();
+            } else {
+                chatbotContainer.classList.remove('open');
+            }
+        });
+        
+        closeChatbotButton.addEventListener('click', () => {
+            chatbotOpen = false;
+            chatbotContainer.classList.remove('open');
+        });
+        
+        // Respuestas más orgánicas y naturales del chatbot
+        const chatbotResponses = {
+            "hola": ["¡Hola! 😊 Me da mucho gusto saludarte. Soy el asistente virtual de UADEN PRIME y estoy aquí para ayudarte con cualquier información que necesites sobre nuestros programas de formación empresarial. ¿En qué puedo asistirte hoy?", "¡Hola! Qué gusto tenerte por aquí. ¿Cómo puedo ayudarte con información sobre UADEN PRIME?"],
+            "precio": ["El programa 'Sistema de Inmobiliarias Exitosas' tiene una inversión de USD 840. Pero tenemos una oferta especial Early Bird de USD 740 si te inscribes con 20 días de anticipación, ¡y además incluye doble tiempo de asesoría! ¿Te gustaría saber más sobre las opciones de pago disponibles?", "Excelente pregunta. El programa completo tiene un valor de USD 840, pero actualmente tenemos una promoción Early Bird a USD 740 con beneficios adicionales. ¿Quieres que te explique las diferentes formas de pago que manejamos?"],
+            "fechas": ["Las fechas de inicio se coordinan según la disponibilidad de los participantes para asegurar la mejor experiencia. Normalmente programamos sesiones cada 15 días. ¿Te gustaría que un asesor se contacte contigo para conversar sobre las próximas fechas disponibles?", "Buena pregunta. Organizamos grupos regularmente según la demanda. ¿Qué tal si coordinamos una llamada con uno de nuestros asesores para encontrar la fecha que mejor se ajuste a tu agenda?"],
+            "programa": ["¡Claro! El programa tiene dos partes fundamentales: Primero, un día intensivo de seminario donde cubrimos todas las estrategias clave. Luego, un mes de asesoría personalizada donde te acompañamos en la implementación. ¿Te interesa conocer más detalles sobre los temas que cubrimos?", "Me encanta hablar sobre esto. Es un programa diseñado en dos fases: 1) Formación intensiva de un día completo y 2) Un mes de seguimiento personalizado para asegurar la implementación. ¿Qué área específica te gustaría conocer más?"],
+            "inscribir": ["¡Perfecto! Para inscribirte puedes completar el formulario que aparece en esta página, o si prefieres, podemos conectar directo con un asesor por WhatsApp para hacer el proceso más rápido. ¿Qué te parece mejor?", "Excelente decisión. Tenemos dos opciones: Puedes llenar el formulario de inscripción en esta página o podemos agendar una llamada rápida con un asesor para resolver todas tus dudas antes de inscribirte. ¿Cuál prefieres?"],
+            "pago": ["Tenemos varias opciones flexibles: puedes pagar en una sola exhibición de USD 840, en 2 cuotas de USD 420, o en 3 cuotas de USD 240. También aceptamos transferencias bancarias internacionales. ¿Cuál se ajusta mejor a tu situación?", "¡Claro! Ofrecemos flexibilidad de pago: única, dos o tres cuotas. Además, si pagas con anticipación accedes al precio promocional. ¿Te gustaría saber más sobre cada opción?"],
+            "empresa": ["¡Excelente! Para equipos ofrecemos la versión IN COMPANY completamente personalizada. Adaptamos el contenido a tus necesidades específicas y podemos incluir a todo tu equipo. ¿Quieres que un asesor especializado te contacte para diseñar un programa a la medida?", "Sí, definitivamente. La versión IN COMPANY es ideal para equipos. Podemos personalizar todo: contenidos, horarios, y hasta los materiales con la identidad de tu empresa. ¿Cuántas personas serían en tu equipo?"],
+            "gracias": ["¡De nada! 😊 Fue un gusto ayudarte. Recuerda que si tienes más preguntas, aquí estaré. ¿Hay algo más en lo que pueda asistirte?", "¡Con mucho gusto! Estoy aquí para ayudarte siempre que lo necesites. ¿Necesitas información sobre algún otro aspecto del programa?"],
+            "contacto": ["¡Claro! Puedes contactar a nuestros asesores por WhatsApp al +1 (602) 555-0187, o por correo a info@uadenprime.com. También puedes completar el formulario y ellos se comunicarán contigo en menos de 24 horas. ¿Prefieres alguna opción en particular?", "Tenemos varios canales: WhatsApp directo, correo electrónico, o a través del formulario de contacto. ¿Cuál te resulta más conveniente? Te puedo proporcionar los detalles."],
+            "default": ["Entiendo tu pregunta. Déjame conectar con la información más precisa. Te sugiero dos opciones: Puedo programar una llamada con un asesor especializado, o si prefieres, puedes completar el formulario de contacto para recibir información detallada personalizada. ¿Qué te parece mejor?", "Buena pregunta. Para darte la información más precisa y actualizada, sería ideal que un asesor se contacte contigo directamente. ¿Te gustaría que coordine eso, o prefieres explorar otras opciones primero?"]
+        };
+        
+        // Función para obtener respuesta aleatoria de un array
+        function getRandomResponse(responses) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        // Función para mostrar indicador de escritura
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'mb-4';
+            typingDiv.id = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="flex items-start">
+                    <div class="w-8 h-8 rounded-full bg-navy-blue flex items-center justify-center mr-2 mt-1">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg rounded-tl-none max-w-xs shadow-sm">
+                        <div class="chatbot-typing">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return typingDiv;
+        }
+        
+        function addMessageToChat(text, isUser = false, isQuickReply = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `mb-4 ${isUser ? 'text-right' : ''}`;
+            
+            if (isUser) {
+                messageDiv.innerHTML = `
+                    <div class="inline-block bg-gradient-to-r from-navy-blue to-gray-700 text-white p-3 rounded-lg rounded-tr-none max-w-xs shadow-sm">
+                        <p class="text-sm">${text}</p>
+                    </div>
+                `;
+            } else if (isQuickReply) {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-navy-blue flex items-center justify-center mr-2 mt-1">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg rounded-tl-none max-w-xs shadow-sm">
+                            <p class="text-sm text-gray-800">${text}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-navy-blue flex items-center justify-center mr-2 mt-1">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg rounded-tl-none max-w-xs shadow-sm">
+                            <p class="text-sm text-gray-800">${text}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        function getChatbotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Detectar intenciones más allá de palabras clave exactas
+            if (lowerMessage.includes('precio') || lowerMessage.includes('cuesta') || lowerMessage.includes('valor') || lowerMessage.includes('cuánto') || lowerMessage.includes('costo')) {
+                return getRandomResponse(chatbotResponses["precio"]);
+            }
+            else if (lowerMessage.includes('fecha') || lowerMessage.includes('cuándo') || lowerMessage.includes('día') || lowerMessage.includes('horario') || lowerMessage.includes('inicio')) {
+                return getRandomResponse(chatbotResponses["fechas"]);
+            }
+            else if (lowerMessage.includes('programa') || lowerMessage.includes('incluye') || lowerMessage.includes('contenido') || lowerMessage.includes('temas') || lowerMessage.includes('módulo')) {
+                return getRandomResponse(chatbotResponses["programa"]);
+            }
+            else if (lowerMessage.includes('inscribir') || lowerMessage.includes('registrar') || lowerMessage.includes('matricular') || lowerMessage.includes('participar')) {
+                return getRandomResponse(chatbotResponses["inscribir"]);
+            }
+            else if (lowerMessage.includes('pago') || lowerMessage.includes('cuota') || lowerMessage.includes('forma de pago') || lowerMessage.includes('financiamiento')) {
+                return getRandomResponse(chatbotResponses["pago"]);
+            }
+            else if (lowerMessage.includes('empresa') || lowerMessage.includes('equipo') || lowerMessage.includes('grupo') || lowerMessage.includes('personalizado') || lowerMessage.includes('in company')) {
+                return getRandomResponse(chatbotResponses["empresa"]);
+            }
+            else if (lowerMessage.includes('contacto') || lowerMessage.includes('asesor') || lowerMessage.includes('hablar') || lowerMessage.includes('llamar') || lowerMessage.includes('whatsapp')) {
+                return getRandomResponse(chatbotResponses["contacto"]);
+            }
+            else if (lowerMessage.includes('hola') || lowerMessage.includes('buenas') || lowerMessage.includes('saludos')) {
+                return getRandomResponse(chatbotResponses["hola"]);
+            }
+            else if (lowerMessage.includes('gracias') || lowerMessage.includes('agradezco') || lowerMessage.includes('agradecido')) {
+                return getRandomResponse(chatbotResponses["gracias"]);
+            }
+            else {
+                return getRandomResponse(chatbotResponses["default"]);
+            }
+        }
+        
+        // Función para manejar quick replies
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quick-reply')) {
+                const question = e.target.getAttribute('data-question');
+                let userMessage = '';
+                
+                switch(question) {
+                    case 'precios': userMessage = '¿Cuánto cuesta el programa?'; break;
+                    case 'fechas': userMessage = '¿Cuándo son las próximas fechas?'; break;
+                    case 'programa': userMessage = '¿Qué incluye el programa?'; break;
+                    case 'contacto': userMessage = '¿Cómo contacto a un asesor?'; break;
+                }
+                
+                // Agregar mensaje del usuario
+                addMessageToChat(userMessage, true);
+                
+                // Mostrar indicador de escritura
+                const typingIndicator = showTypingIndicator();
+                
+                // Obtener y mostrar respuesta después de un delay
+                setTimeout(() => {
+                    // Remover indicador de escritura
+                    if (typingIndicator && typingIndicator.parentNode) {
+                        typingIndicator.parentNode.removeChild(typingIndicator);
+                    }
+                    
+                    // Obtener y mostrar respuesta
+                    const response = getChatbotResponse(userMessage);
+                    addMessageToChat(response);
+                }, 1500);
+            }
+        });
+        
+        sendChatbotMessageButton.addEventListener('click', () => {
+            const message = chatbotInput.value.trim();
+            
+            if(message) {
+                // Add user message
+                addMessageToChat(message, true);
+                
+                // Clear input
+                chatbotInput.value = '';
+                
+                // Mostrar indicador de escritura
+                const typingIndicator = showTypingIndicator();
+                
+                // Simular delay de escritura más natural
+                setTimeout(() => {
+                    // Remover indicador de escritura
+                    if (typingIndicator && typingIndicator.parentNode) {
+                        typingIndicator.parentNode.removeChild(typingIndicator);
+                    }
+                    
+                    // Get and add chatbot response
+                    const response = getChatbotResponse(message);
+                    addMessageToChat(response);
+                }, 1200 + Math.random() * 800); // Delay variable para parecer más humano
+            }
+        });
+        
+        chatbotInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                sendChatbotMessageButton.click();
+            }
+        });
+        
+        // Form Submission
+        const registrationForm = document.getElementById('registrationForm');
+        const successModal = document.getElementById('successModal');
+        const closeModalButton = document.getElementById('closeModal');
+        
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // In a real implementation, you would send the form data to a server
+            // For this demo, we'll just show the success modal
+            successModal.classList.remove('hidden');
+            
+            // Reset form
+            registrationForm.reset();
+        });
+        
+        closeModalButton.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+        });
+        
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if(e.target === successModal) {
+                successModal.classList.add('hidden');
+            }
+        });
+        
+        // Auto-open chatbot after 30 seconds if user hasn't interacted
+        setTimeout(() => {
+            if (!chatbotOpen && !localStorage.getItem('chatbotOpened')) {
+                chatbotOpen = true;
+                chatbotContainer.classList.add('open');
+                chatbotInput.focus();
+                localStorage.setItem('chatbotOpened', 'true');
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
